@@ -9,7 +9,7 @@ class FormsWallet extends React.Component {
     this.state = {
       value: '',
       description: '',
-      currency: '',
+      currency: 'USD',
       method: '',
       tag: '',
       currencys: [],
@@ -22,7 +22,6 @@ class FormsWallet extends React.Component {
     this.handleInputs = this.handleInputs.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getCurrencys = this.getCurrencys.bind(this);
-    this.selectedOption = this.selectedOption.bind(this);
   }
 
   componentDidMount() {
@@ -37,12 +36,6 @@ class FormsWallet extends React.Component {
 
   handleInputs({ target: { name, value } }) {
     this.setState({ [name]: value });
-  }
-
-  selectedOption(option) {
-    if (option.exchangeRates.USD.code) {
-      return 'selected';
-    }
   }
 
   handleSubmit() {
@@ -101,13 +94,7 @@ class FormsWallet extends React.Component {
         {
           currencys.length === 0 ? null : (
             currencys.map((curren) => (
-              <option
-                selected={ this.selectedOption }
-                key={ curren }
-                value={ curren }
-              >
-                {curren}
-              </option>))
+              <option key={ curren } value={ curren }>{ curren }</option>))
           )
         }
       </select>
@@ -124,7 +111,7 @@ class FormsWallet extends React.Component {
           onChange={ this.handleInputs }
         >
           <option>Dinheiro</option>
-          <option selected="selected">Cartão de crédito</option>
+          <option>Cartão de crédito</option>
           <option>Cartão de débito</option>
         </select>
       </label>
