@@ -31,7 +31,11 @@ class FormsWallet extends React.Component {
   getCurrencys() {
     fetch('https://economia.awesomeapi.com.br/json/all')
       .then((response) => response.json())
-      .then((quotes) => this.setState({ currencys: Object.keys(quotes) }));
+      .then((quotes) => {
+        const currencys = Object.keys(quotes);
+        currencys.splice(1, 1);
+        this.setState({ currencys });
+      });
   }
 
   handleInputs({ target: { name, value } }) {
@@ -86,18 +90,22 @@ class FormsWallet extends React.Component {
   renderCurrency() {
     const { currencys } = this.state;
     return (
-      <select
-        data-testid="currency-input"
-        name="currency"
-        onChange={ this.handleInputs }
-      >
-        {
-          currencys.length === 0 ? null : (
-            currencys.map((curren) => (
-              <option key={ curren } value={ curren }>{ curren }</option>))
-          )
-        }
-      </select>
+      <label htmlFor="currency">
+        Moeda
+        <select
+          data-testid="currency-input"
+          name="currency"
+          id="currency"
+          onChange={ this.handleInputs }
+        >
+          {
+            currencys.length === 0 ? null : (
+              currencys.map((curren) => (
+                <option key={ curren } data-testid={ curren }>{ curren }</option>))
+            )
+          }
+        </select>
+      </label>
     );
   }
 
