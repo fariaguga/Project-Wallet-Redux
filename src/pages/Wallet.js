@@ -36,7 +36,8 @@ const mapStateToProps = (state) => ({
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
   expenses: PropTypes.shape({
-    reduce: PropTypes.func.isRequired
+    map: PropTypes.func,
+    reduce: PropTypes.func.isRequired,
   }).isRequired,
 };
 
