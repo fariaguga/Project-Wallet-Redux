@@ -110,6 +110,7 @@ class FormsWallet extends React.Component {
   }
 
   renderPayment() {
+    const { method } = this.state;
     return (
       <label htmlFor="method">
         Método de pagamento
@@ -117,10 +118,12 @@ class FormsWallet extends React.Component {
           data-testid="method-input"
           name="method"
           onChange={ this.handleInputs }
+          value={ method }
+          id="method"
         >
-          <option>Dinheiro</option>
-          <option>Cartão de crédito</option>
-          <option>Cartão de débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
         </select>
       </label>
     );
@@ -135,6 +138,7 @@ class FormsWallet extends React.Component {
           name="tag"
           data-testid="tag-input"
           onChange={ this.handleInputs }
+          id="tag"
         >
           <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
@@ -179,8 +183,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  expensesApplication: state.expensesUser.expenses,
-  currencies: state.expensesUser.currencies,
+  expensesApplication: state.wallet.expenses,
+  currencies: state.wallet.currencies,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormsWallet);
