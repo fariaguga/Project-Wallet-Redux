@@ -5,12 +5,21 @@ import FormsWallet from './FormsWallet';
 
 class Wallet extends React.Component {
   render() {
-    const { email } = this.props;
+    const { email, expenses } = this.props;
+    const convertToBrl = expenses.map(
+      (expense) => expense.value * Object.entries(expense.exchangeRates).find(
+        (currency) => expense.currency === currency[0],
+      )[1].ask,
+    );
     return (
       <div>
         <header>
           <h3 data-testid="email-field">{email}</h3>
-          <h3 data-testid="total-field">0</h3>
+          <h3 data-testid="total-field">
+            {
+              convertToBrl.reduce((acc, cur) => acc + cur, 0)
+            }
+          </h3>
           <h3 data-testid="header-currency-field">BRL</h3>
         </header>
         <FormsWallet />
@@ -21,10 +30,14 @@ class Wallet extends React.Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  expenses: state.expensesUser.expenses,
 });
 
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
+  expenses: PropTypes.shape({
+    reduce: PropTypes.func.isRequired
+  }).isRequired,
 };
 
 export default connect(mapStateToProps)(Wallet);
