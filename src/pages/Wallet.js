@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FormsWallet from './FormsWallet';
+import TableExpenses from '../components/TableExpenses';
 
 class Wallet extends React.Component {
   render() {
@@ -23,6 +24,7 @@ class Wallet extends React.Component {
           <h3 data-testid="header-currency-field">BRL</h3>
         </header>
         <FormsWallet />
+        <TableExpenses />
       </div>
     );
   }

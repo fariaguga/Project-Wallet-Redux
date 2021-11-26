@@ -152,21 +152,23 @@ class FormsWallet extends React.Component {
 
   render() {
     return (
-      <form id="form">
-        {this.renderExpenses()}
-        {this.renderDescription()}
-        {this.renderCurrency()}
-        {this.renderPayment()}
-        {this.renderTag()}
-        <button
-          type="button"
-          // disabled={ disabled }
-          onClick={ this.handleSubmit }
-        >
-          Adicionar despesa
-        </button>
+      <div>
+        <form id="form">
+          {this.renderExpenses()}
+          {this.renderDescription()}
+          {this.renderCurrency()}
+          {this.renderPayment()}
+          {this.renderTag()}
+          <button
+            type="button"
+            // disabled={ disabled }
+            onClick={ this.handleSubmit }
+          >
+            Adicionar despesa
+          </button>
+        </form>
+      </div>
 
-      </form>
     );
   }
 }
